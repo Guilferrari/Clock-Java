@@ -26,17 +26,19 @@ public class Frames extends JFrame {
         timeLabel.setOpaque(true);
 
         JLabel dayLabel = new JLabel();
+        JLabel dateLabel = new JLabel();
         dayLabel.setFont(new Font("Arial",Font.PLAIN,50));
+        dateLabel.setFont(new Font("Arial",Font.PLAIN,50));
 
         super.add(timeLabel);
         super.add(dayLabel);
+        super.add(dateLabel);
         super.setVisible(true);
-
 
         new Thread(() -> reloadTime(timeLabel)).start();
 
         reloadDay(dayLabel);
-
+        reloadDate(dateLabel);
 
     }
 
@@ -60,9 +62,16 @@ public class Frames extends JFrame {
 
     private void reloadDay(JLabel dayLabel){
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("E");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
 
         String day = dayFormat.format(Calendar.getInstance().getTime());
         dayLabel.setText(day);
+    }
+
+    private void reloadDate(JLabel dateLabel){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        String date = dateFormat.format(Calendar.getInstance().getTime());
+        dateLabel.setText(date);
     }
 }
